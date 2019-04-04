@@ -1,9 +1,10 @@
-// 设置初始值
-const defaultState = {
-    test: `this is test redux`
-};
+// 引入核心组件
+import { combineReducers } from "redux";
 
-// 导出数据
-export default (state = defaultState, action) => {
-    return state;
-};
+// 引入header组件中的reducer
+import headerReducer from "../header/store/reducer";
+
+// 将各组件的数据整合到一处
+export default combineReducers({
+    header: headerReducer
+});
