@@ -12,68 +12,14 @@ import {
 // 设置redux
 import { connect } from "react-redux";
 
-class Calculator extends Component {
-    constructor(props) {
-        super(props);
-        this.inputCon = this.inputCon.bind(this);
-    }
+// 引入常量
+import { actions } from "./store";
 
-    inputCon(item) {
-        let that = this;
-        console.log(`当前点击的值为 >>>>>>`, item);
-        if (
-            item === `0` ||
-            item === `1` ||
-            item === `2` ||
-            item === `3` ||
-            item === `4` ||
-            item === `5` ||
-            item === `6` ||
-            item === `7` ||
-            item === `8` ||
-            item === `9`
-        ) {
-            console.log(`item >>>>>`, item);
-        } else {
-        }
-        switch (item) {
-            case `+`:
-                console.log(`item >>>>>`, item);
-                break;
-            case `-`:
-                console.log(`item >>>>>`, item);
-                break;
-            case `*`:
-                console.log(`item >>>>>`, item);
-                break;
-            case `%`:
-                console.log(`item >>>>>`, item);
-                break;
-            case `C`:
-                console.log(`item >>>>>`, item);
-                break;
-            case `(`:
-                console.log(`item >>>>>`, item);
-                break;
-            case `)`:
-                console.log(`item >>>>>`, item);
-                break;
-            case `.`:
-                console.log(`item >>>>>`, item);
-                break;
-            case `←`:
-                console.log(`item >>>>>`, item);
-                break;
-            case `=`:
-                console.log(`item >>>>>`, item);
-                break;
-            default:
-                break;
-        }
-    }
+// 计算器组件
+class Calculator extends Component {
     render() {
         // 解构赋值(注意引入的位置在render里面)
-        const { keyArr, value, keyData } = this.props;
+        const { keyArr, value, keyData, inputCon } = this.props;
         return (
             <Container>
                 <TextValue>{value}</TextValue>
@@ -84,7 +30,7 @@ class Calculator extends Component {
                             <Key
                                 key={item}
                                 onClick={() => {
-                                    this.inputCon(item, index);
+                                    inputCon(item, index);
                                 }}
                             >
                                 {item}
@@ -106,7 +52,61 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => {
-    return {};
+    return {
+        inputCon(item) {
+            if (
+                item === `0` ||
+                item === `1` ||
+                item === `2` ||
+                item === `3` ||
+                item === `4` ||
+                item === `5` ||
+                item === `6` ||
+                item === `7` ||
+                item === `8` ||
+                item === `9`
+            ) {
+                console.log(`item >>>>>`, item);
+                dispatch(actions.getValueNowFun(item));
+            } else {
+            }
+            switch (item) {
+                case `+`:
+                    console.log(`item >>>>>`, item);
+                    break;
+                case `-`:
+                    console.log(`item >>>>>`, item);
+                    break;
+                case `*`:
+                    console.log(`item >>>>>`, item);
+                    break;
+                case `%`:
+                    console.log(`item >>>>>`, item);
+                    break;
+                case `C`:
+                    console.log(`item >>>>>`, item);
+                    dispatch(actions.cleanValueFun(``));
+                    break;
+                case `(`:
+                    console.log(`item >>>>>`, item);
+                    break;
+                case `)`:
+                    console.log(`item >>>>>`, item);
+                    break;
+                case `.`:
+                    console.log(`item >>>>>`, item);
+                    break;
+                case `←`:
+                    console.log(`item >>>>>`, item);
+                    break;
+                case `=`:
+                    console.log(`item >>>>>`, item);
+                    break;
+                default:
+                    break;
+            }
+        }
+    };
 };
 
 export default connect(
