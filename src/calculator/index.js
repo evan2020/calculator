@@ -15,6 +15,61 @@ import { connect } from "react-redux";
 class Calculator extends Component {
     constructor(props) {
         super(props);
+        this.inputCon = this.inputCon.bind(this);
+    }
+
+    inputCon(item) {
+        let that = this;
+        console.log(`当前点击的值为 >>>>>>`, item);
+        if (
+            item === `0` ||
+            item === `1` ||
+            item === `2` ||
+            item === `3` ||
+            item === `4` ||
+            item === `5` ||
+            item === `6` ||
+            item === `7` ||
+            item === `8` ||
+            item === `9`
+        ) {
+            console.log(`item >>>>>`, item);
+        } else {
+        }
+        switch (item) {
+            case `+`:
+                console.log(`item >>>>>`, item);
+                break;
+            case `-`:
+                console.log(`item >>>>>`, item);
+                break;
+            case `*`:
+                console.log(`item >>>>>`, item);
+                break;
+            case `%`:
+                console.log(`item >>>>>`, item);
+                break;
+            case `C`:
+                console.log(`item >>>>>`, item);
+                break;
+            case `(`:
+                console.log(`item >>>>>`, item);
+                break;
+            case `)`:
+                console.log(`item >>>>>`, item);
+                break;
+            case `.`:
+                console.log(`item >>>>>`, item);
+                break;
+            case `←`:
+                console.log(`item >>>>>`, item);
+                break;
+            case `=`:
+                console.log(`item >>>>>`, item);
+                break;
+            default:
+                break;
+        }
     }
     render() {
         // 解构赋值(注意引入的位置在render里面)
@@ -25,7 +80,16 @@ class Calculator extends Component {
                 <ProcessText>{keyData.join(` `)}</ProcessText>
                 <KeyboardCon>
                     {keyArr.map((item, index) => {
-                        return <Key key={item}>{item}</Key>;
+                        return (
+                            <Key
+                                key={item}
+                                onClick={() => {
+                                    this.inputCon(item, index);
+                                }}
+                            >
+                                {item}
+                            </Key>
+                        );
                     })}
                 </KeyboardCon>
             </Container>
