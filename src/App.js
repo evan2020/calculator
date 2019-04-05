@@ -8,6 +8,8 @@ import GlobalStyle from "./common/reset";
 
 // 引入home组件
 import Home from "./home/index";
+// 引入计算器组件
+import Calculator from "./calculator/index";
 
 // 引入store
 import store from "./store/index";
@@ -21,12 +23,12 @@ class App extends Component {
         return (
             <Provider store={store}>
                 <Router>
-                    <div>
-                        {/* 全局样式reset */}
-                        <GlobalStyle />
-                        {/* 首页路由 */}
-                        <Route exact path="/" component={Home} />
-                    </div>
+                    {/* 全局样式reset */}
+                    <GlobalStyle />
+                    {/* 首页路由 */}
+                    <Route exact path="/" component={Home} />
+                    {/* 计算器路由 */}
+                    <Route exact path="/calculator" component={Calculator} />
                 </Router>
             </Provider>
         );

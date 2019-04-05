@@ -2,9 +2,7 @@
 import { fromJS } from "immutable";
 
 // 设置初始值
-const defaultState = fromJS({
-    headerText: `this is test redux`
-});
+const defaultState = fromJS({});
 
 // 导出数据
 export default (state = defaultState, action) => {
