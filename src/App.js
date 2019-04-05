@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 
 // 引入路由
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 
 // 引入全局样式
-import GlobalStyle from "./reset";
+import GlobalStyle from "./common/reset";
 
 // 引入home组件
 import Home from "./home/index";

@@ -7,7 +7,7 @@ import { connect } from "react-redux";
 import * as actionCreators from "./store/actionCreators";
 
 // 引入常量
-import * as contants from "./store/constants";
+// import * as contants from "./store/constants";
 
 // 首页组件
 class Home extends Component {

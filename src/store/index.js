@@ -1,5 +1,5 @@
 // 引入redux
-import { createStore, applyMiddleware, compose } from "redux";
+import { createStore, compose } from "redux";
 
 // 引入resucer
 import reducer from "./reducer";
