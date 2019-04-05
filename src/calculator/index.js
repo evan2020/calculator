@@ -1,7 +1,13 @@
 import React, { Component } from "react";
 
 // 引入样式文件
-import { Container, Line, KeyboardCon, Key } from "./style.js";
+import {
+    Container,
+    KeyboardCon,
+    Key,
+    TextValue,
+    ProcessText
+} from "./style.js";
 
 // 设置redux
 import { connect } from "react-redux";
@@ -12,10 +18,11 @@ class Calculator extends Component {
     }
     render() {
         // 解构赋值(注意引入的位置在render里面)
-        const { keyArr } = this.props;
+        const { keyArr, value, keyData } = this.props;
         return (
             <Container>
-                <Line />
+                <TextValue>{value}</TextValue>
+                <ProcessText>{keyData.join(` `)}</ProcessText>
                 <KeyboardCon>
                     {keyArr.map((item, index) => {
                         return <Key key={item}>{item}</Key>;
@@ -28,11 +35,17 @@ class Calculator extends Component {
 
 const mapStateToProps = state => {
     return {
-        keyArr: state.getIn([`calculator`, `keyArr`])
+        value: state.getIn([`calculator`, `value`]),
+        keyArr: state.getIn([`calculator`, `keyArr`]),
+        keyData: state.getIn([`calculator`, `keyData`])
     };
+};
+
+const mapDispatchToProps = dispatch => {
+    return {};
 };
 
 export default connect(
     mapStateToProps,
-    null
+    mapDispatchToProps
 )(Calculator);

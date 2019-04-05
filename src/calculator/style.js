@@ -10,12 +10,35 @@ export const Container = styled.div`
     border: 1px solid #fff;
 `;
 
-// 分割线
-export const Line = styled.div`
+// 当前输入的区域和值
+export const TextValue = styled.div`
     width: 100%;
-    height: 2px;
-    background-color: #ec6770;
-    margin-top: 2.81rem;
+    height: 2.82rem;
+    font-size: 1.5rem;
+    color: #fff;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 0.2rem;
+    padding-left: 0.2rem;
+    box-sizing: border-box;
+    border-bottom: 2px solid #ec6770;
+`;
+
+// 输入过程区域
+export const ProcessText = styled.div`
+    width: 100%;
+    height: 0.59rem;
+    color: #fff;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+    box-sizing: border-box;
+    padding-right: 0.2rem;
+    padding-left: 0.2rem;
+    font-size: 0.3rem;
 `;
 
 // 键盘区域
