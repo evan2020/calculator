@@ -1,5 +1,5 @@
 // 引入核心组件
-import { combineReducers } from "redux";
+import { combineReducers } from "redux-immutable";
 
 // 引入header组件中的reducer
 import headerReducer from "../header/store/reducer";

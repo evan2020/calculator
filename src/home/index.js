@@ -18,7 +18,7 @@ class Home extends Component {
 
 const mapStateToProps = state => {
     return {
-        text: state.home.homeText
+        text: state.getIn([`home`, `homeText`])
     };
 };
 const mapDispatchToProps = dispatch => {

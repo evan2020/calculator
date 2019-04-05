@@ -1,3 +1,5 @@
+
+
 // 引入action常量
 import * as actionTypes from "./constants";
 
@@ -5,6 +7,6 @@ import * as actionTypes from "./constants";
 export const changeText = () => {
     return {
         type: actionTypes.CHANGE_TEXT,
-        value:`test value`
+        value: `test value`
     };
 };
