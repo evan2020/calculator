@@ -20,15 +20,18 @@ class Calculator extends Component {
     render() {
         // 解构赋值(注意引入的位置在render里面)
         const { keyArr, value, keyData, inputCon, resultVal } = this.props;
+        // 组件
         return (
             <Container>
+                {/* 当前输入的值 */}
                 <TextValue>{value}</TextValue>
+                {/* 根据是否存在结果显示计算过程或者结果 */}
                 {resultVal ? (
                     <ProcessText>{resultVal}</ProcessText>
                 ) : (
                     <ProcessText>{keyData.join(` `)}</ProcessText>
                 )}
-                {/* <ProcessText>{keyData.join(` `)}</ProcessText> */}
+                {/* 按键区域 */}
                 <KeyboardCon>
                     {keyArr.map((item, index) => {
                         return (
@@ -47,7 +50,7 @@ class Calculator extends Component {
         );
     }
 }
-
+// 映射redux数据
 const mapStateToProps = state => {
     return {
         value: state.getIn([`calculator`, `value`]),
@@ -56,9 +59,10 @@ const mapStateToProps = state => {
         resultVal: state.getIn([`calculator`, `resultVal`])
     };
 };
-
+// 映射redux异步交互
 const mapDispatchToProps = dispatch => {
     return {
+        // 监听点击键盘
         inputCon(item) {
             if (
                 item === `0` ||
@@ -73,55 +77,42 @@ const mapDispatchToProps = dispatch => {
                 item === `9` ||
                 item === `.`
             ) {
-                console.log(`item >>>>>`, item);
                 dispatch(actions.getValueNowFun(item));
             } else {
-            }
-            switch (item) {
-                case `+`:
-                    console.log(`item >>>>>`, item);
-                    dispatch(actions.recordValueFun(item));
-                    break;
-                case `-`:
-                    console.log(`item >>>>>`, item);
-                    dispatch(actions.recordValueFun(item));
-                    break;
-                case `*`:
-                    console.log(`item >>>>>`, item);
-                    dispatch(actions.recordValueFun(item));
-                    break;
-                case `/`:
-                    console.log(`item >>>>>`, item);
-                    dispatch(actions.recordValueFun(item));
-                    break;
-                case `C`:
-                    console.log(`item >>>>>`, item);
-                    dispatch(actions.cleanValueFun(``));
-                    break;
-                case `(`:
-                    console.log(`item >>>>>`, item);
-                    break;
-                case `)`:
-                    console.log(`item >>>>>`, item);
-                    break;
-                case `.`:
-                    console.log(`item >>>>>`, item);
-                    break;
-                case `←`:
-                    console.log(`item >>>>>`, item);
-                    dispatch(actions.backSpace(``));
-                    break;
-                case `=`:
-                    console.log(`item >>>>>`, item);
-                    dispatch(actions.computeValueFun(item));
-                    break;
-                default:
-                    break;
+                switch (item) {
+                    case `+`:
+                        dispatch(actions.recordValueFun(item));
+                        break;
+                    case `-`:
+                        dispatch(actions.recordValueFun(item));
+                        break;
+                    case `*`:
+                        dispatch(actions.recordValueFun(item));
+                        break;
+                    case `/`:
+                        dispatch(actions.recordValueFun(item));
+                        break;
+                    case `C`:
+                        dispatch(actions.cleanValueFun(``));
+                        break;
+                    case `(`:
+                        break;
+                    case `)`:
+                        break;
+                    case `←`:
+                        dispatch(actions.backSpace(``));
+                        break;
+                    case `=`:
+                        dispatch(actions.computeValueFun(item));
+                        break;
+                    default:
+                        break;
+                }
             }
         }
     };
 };
-
+// 映射redux
 export default connect(
     mapStateToProps,
     mapDispatchToProps

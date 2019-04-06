@@ -85,7 +85,6 @@ export default (state = defaultState, action) => {
                 if (valueStr && state.get(`keyData`).last() === `+`) {
                     res += valueStr;
                 } else if (valueStr && state.get(`keyData`).last() === `-`) {
-                    console.log(`减去 >>>>>>>>>`);
                     res -= valueStr;
                 }
             } else {
@@ -101,7 +100,6 @@ export default (state = defaultState, action) => {
                         .get(`keyData`)
                         .pop()
                         .map((item, index) => {
-                            console.log(`新数组 >>>>>>`, item);
                             newRes += item;
                             return item;
                         });
@@ -109,9 +107,12 @@ export default (state = defaultState, action) => {
                 if (state.get(`value`)) {
                     newRes += symbolVal;
                     newRes += state.get(`value`);
+                }
+                try {
                     res = eval(newRes);
-                } else {
-                    res = eval(newRes);
+                } catch (e) {
+                    // 提示语:建议不要使用连续的算术符号
+                    alert(`未知错误${e}`);
                 }
             }
 
