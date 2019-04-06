@@ -40,6 +40,14 @@ export const cleanValue = (value = ``) => {
     };
 };
 
+// 记录数据
+export const recordValue = (value = ``) => {
+    return {
+        type: constants.RECORD_VALUE,
+        value
+    };
+};
+
 // ------------------------------------定义并且导出actions end--------------------------------------
 
 // ------------------------------------action 异步函数 start----------------------------------------
@@ -55,6 +63,14 @@ export const getValueNowFun = (value = ``) => {
 export const cleanValueFun = (value = ``) => {
     return dispatch => {
         const action = cleanValue(value);
+        dispatch(action);
+    };
+};
+
+// 点击加减乘除时,清空数值,得出临时结果,并上一次的记录数据
+export const recordValueFun = (value = ``) => {
+    return dispatch => {
+        const action = recordValue(value);
         dispatch(action);
     };
 };

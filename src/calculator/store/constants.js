@@ -17,3 +17,6 @@ export const COMPUTE_VALUE = `${moduleName}/compute_value`;
 
 // 清空数据
 export const CLEAN_VALUE = `${moduleName}/clean_value`;
+
+// 记录数据
+export const RECORD_VALUE = `${moduleName}/record_value`;

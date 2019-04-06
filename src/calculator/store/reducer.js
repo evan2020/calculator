@@ -48,6 +48,17 @@ export default (state = defaultState, action) => {
                 .set(`value`, ``)
                 .set(`resultVal`, ``)
                 .set(`keyData`, []);
+        // 记录数据
+        case constants.RECORD_VALUE:
+            return state
+                .set(
+                    `keyData`,
+                    state
+                        .get(`keyData`)
+                        .push(state.get(`value`))
+                        .push(action.value)
+                )
+                .set(`value`, ``);
         default:
             break;
     }
