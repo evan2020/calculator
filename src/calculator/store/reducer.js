@@ -63,7 +63,12 @@ export default (state = defaultState, action) => {
             let res = 0;
             let resEvalVal = ``;
             state.get(`keyData`).map((item, index) => {
-                if (item === `*` || item === `/`) {
+                if (
+                    item === `*` ||
+                    item === `/` ||
+                    item === `(` ||
+                    item === `)`
+                ) {
                     isEval = true;
                 }
                 resEvalVal += item;
@@ -94,7 +99,9 @@ export default (state = defaultState, action) => {
                     symbolVal === `+` ||
                     symbolVal === `-` ||
                     symbolVal === `*` ||
-                    symbolVal === `/`
+                    symbolVal === `/` ||
+                    symbolVal === `(` ||
+                    symbolVal === `)`
                 ) {
                     state
                         .get(`keyData`)
@@ -104,7 +111,8 @@ export default (state = defaultState, action) => {
                             return item;
                         });
                 }
-                if (state.get(`value`)) {
+                let getVal = state.get(`value`) || 0;
+                if (getVal !== 0) {
                     newRes += symbolVal;
                     newRes += state.get(`value`);
                 }

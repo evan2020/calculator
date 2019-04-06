@@ -96,8 +96,10 @@ const mapDispatchToProps = dispatch => {
                         dispatch(actions.cleanValueFun(``));
                         break;
                     case `(`:
+                        dispatch(actions.recordValueFun(item));
                         break;
                     case `)`:
+                        dispatch(actions.recordValueFun(item));
                         break;
                     case `←`:
                         dispatch(actions.backSpace(``));
