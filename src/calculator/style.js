@@ -39,6 +39,8 @@ export const ProcessText = styled.div`
     padding-right: 0.2rem;
     padding-left: 0.2rem;
     font-size: 0.3rem;
+    overflow: hidden;
+    white-space: nowrap;
 `;
 
 // 键盘区域
