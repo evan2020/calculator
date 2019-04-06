@@ -19,11 +19,14 @@ import { actions } from "./store";
 class Calculator extends Component {
     render() {
         // 解构赋值(注意引入的位置在render里面)
-        const { keyArr, value, keyData, inputCon } = this.props;
+        const { keyArr, value, keyData, inputCon, resultVal } = this.props;
         return (
             <Container>
                 <TextValue>{value}</TextValue>
-                <ProcessText>{keyData.join(` `)}</ProcessText>
+                {
+                   resultVal?<ProcessText>{resultVal}</ProcessText>:<ProcessText>{keyData.join(` `)}</ProcessText>
+                }
+                {/* <ProcessText>{keyData.join(` `)}</ProcessText> */}
                 <KeyboardCon>
                     {keyArr.map((item, index) => {
                         return (
@@ -47,7 +50,8 @@ const mapStateToProps = state => {
     return {
         value: state.getIn([`calculator`, `value`]),
         keyArr: state.getIn([`calculator`, `keyArr`]),
-        keyData: state.getIn([`calculator`, `keyData`])
+        keyData: state.getIn([`calculator`, `keyData`]),
+        resultVal: state.getIn([`calculator`, `resultVal`])
     };
 };
 

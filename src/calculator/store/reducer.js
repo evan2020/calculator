@@ -41,8 +41,10 @@ export default (state = defaultState, action) => {
     switch (action.type) {
         // 获取输入框的值
         case constants.GET_VALUE_NOW:
-            return state.set(`value`, state.get(`value`) + action.value);
-        // 获取默认值
+            return state
+                .set(`value`, state.get(`value`) + action.value)
+                .set(`resultVal`, ``)
+        // 获取默认值(清空)
         case constants.CLEAN_VALUE:
             return state
                 .set(`value`, ``)
@@ -66,7 +68,7 @@ export default (state = defaultState, action) => {
                 }
                 return item;
             });
-            return state.set(`resultVal`, res);
+            return state.set(`resultVal`, res).set(`value`, ``).set(`keyData`, fromJS([]));
         default:
             break;
     }
