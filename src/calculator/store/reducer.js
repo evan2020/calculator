@@ -60,15 +60,24 @@ export default (state = defaultState, action) => {
         // 计算结果
         case constants.COMPUTE_VALUE:
             let res = 0;
-            let lastStr = Number(state.get(`value`));
+            let firstStr = Number(state.get(`keyData`).first());
+            let lastStr = Number(state.get(`keyData`).last());
+            let valueStr = Number(state.get(`value`));
+            res += firstStr;
             state.get(`keyData`).map((item, index) => {
                 if (item === `+`) {
-                    res += Number(state.get(`keyData`).get(index - 1));
-                } 
+                    res += Number(state.get(`keyData`).get(index + 1)) || 0;
+                }
+                if (item === `-`) {
+                    res -= Number(state.get(`keyData`).get(index + 1)) || 0;
+                }
                 return item;
             });
-            if (lastStr) {
-                res += lastStr;
+            if (valueStr && state.get(`keyData`).last() === `+`) {
+                res += valueStr;
+            } else if (valueStr && state.get(`keyData`).last() === `-`) {
+                console.log(`减去 >>>>>>>>>`);
+                res -= valueStr;
             }
             return state
                 .set(`resultVal`, res)
