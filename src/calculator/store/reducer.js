@@ -1,5 +1,5 @@
 // 引用immutable对象
-import { fromJS, Seq } from "immutable";
+import { fromJS } from "immutable";
 
 import { constants } from "./index";
 
@@ -28,7 +28,7 @@ const defaultState = fromJS({
         `1`,
         `2`,
         `3`,
-        `%`,
+        `/`,
         `0`,
         `.`,
         `←`,
@@ -59,25 +59,62 @@ export default (state = defaultState, action) => {
             return state.set(`keyData`, newKeyData).set(`value`, ``);
         // 计算结果
         case constants.COMPUTE_VALUE:
+            let isEval = false;
             let res = 0;
-            let firstStr = Number(state.get(`keyData`).first());
-            let valueStr = Number(state.get(`value`));
-            res += firstStr;
+            let resEvalVal = ``;
             state.get(`keyData`).map((item, index) => {
-                if (item === `+`) {
-                    res += Number(state.get(`keyData`).get(index + 1)) || 0;
+                if (item === `*` || item === `/`) {
+                    isEval = true;
                 }
-                if (item === `-`) {
-                    res -= Number(state.get(`keyData`).get(index + 1)) || 0;
-                }
+                resEvalVal += item;
                 return item;
             });
-            if (valueStr && state.get(`keyData`).last() === `+`) {
-                res += valueStr;
-            } else if (valueStr && state.get(`keyData`).last() === `-`) {
-                console.log(`减去 >>>>>>>>>`);
-                res -= valueStr;
+            if (!isEval) {
+                let firstStr = Number(state.get(`keyData`).first());
+                let valueStr = Number(state.get(`value`));
+                res += firstStr;
+                state.get(`keyData`).map((item, index) => {
+                    if (item === `+`) {
+                        res += Number(state.get(`keyData`).get(index + 1)) || 0;
+                    }
+                    if (item === `-`) {
+                        res -= Number(state.get(`keyData`).get(index + 1)) || 0;
+                    }
+                    return item;
+                });
+                if (valueStr && state.get(`keyData`).last() === `+`) {
+                    res += valueStr;
+                } else if (valueStr && state.get(`keyData`).last() === `-`) {
+                    console.log(`减去 >>>>>>>>>`);
+                    res -= valueStr;
+                }
+            } else {
+                let symbolVal = resEvalVal.slice(-1);
+                let newRes = ``;
+                if (
+                    symbolVal === `+` ||
+                    symbolVal === `-` ||
+                    symbolVal === `*` ||
+                    symbolVal === `/`
+                ) {
+                    state
+                        .get(`keyData`)
+                        .pop()
+                        .map((item, index) => {
+                            console.log(`新数组 >>>>>>`, item);
+                            newRes += item;
+                            return item;
+                        });
+                }
+                if (state.get(`value`)) {
+                    newRes += symbolVal;
+                    newRes += state.get(`value`);
+                    res = eval(newRes);
+                } else {
+                    res = eval(newRes);
+                }
             }
+
             return state
                 .set(`resultVal`, res)
                 .set(`value`, ``)

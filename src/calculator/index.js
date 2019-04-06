@@ -88,9 +88,11 @@ const mapDispatchToProps = dispatch => {
                     break;
                 case `*`:
                     console.log(`item >>>>>`, item);
+                    dispatch(actions.recordValueFun(item));
                     break;
-                case `%`:
+                case `/`:
                     console.log(`item >>>>>`, item);
+                    dispatch(actions.recordValueFun(item));
                     break;
                 case `C`:
                     console.log(`item >>>>>`, item);
