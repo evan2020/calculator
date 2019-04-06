@@ -47,18 +47,26 @@ export default (state = defaultState, action) => {
             return state
                 .set(`value`, ``)
                 .set(`resultVal`, ``)
-                .set(`keyData`, []);
+                .set(`keyData`, fromJS([]));
         // 记录数据
         case constants.RECORD_VALUE:
-            return state
-                .set(
-                    `keyData`,
-                    state
-                        .get(`keyData`)
-                        .push(state.get(`value`))
-                        .push(action.value)
-                )
-                .set(`value`, ``);
+            let newKeyData = state
+                .get(`keyData`)
+                .push(state.get(`value`))
+                .push(action.value);
+            return state.set(`keyData`, newKeyData).set(`value`, ``);
+        // 计算结果
+        case constants.COMPUTE_VALUE:
+            let res = 0;
+            let lastStr = Number(state.get(`value`));
+            state.get(`keyData`).map((item, index) => {
+                if (item === `+`) {
+                    res += Number(state.get(`keyData`).get(index - 1));
+                    res += lastStr;
+                }
+                return item;
+            });
+            return state.set(`resultVal`, res);
         default:
             break;
     }

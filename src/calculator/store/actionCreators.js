@@ -74,4 +74,12 @@ export const recordValueFun = (value = ``) => {
         dispatch(action);
     };
 };
+
+// 计算结果
+export const computeValueFun = (value = ``) => {
+    return dispatch => {
+        const action = computeValue(value);
+        dispatch(action);
+    };
+};
 // ------------------------------------action 异步函数 end----------------------------------------

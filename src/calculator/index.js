@@ -102,6 +102,7 @@ const mapDispatchToProps = dispatch => {
                     break;
                 case `=`:
                     console.log(`item >>>>>`, item);
+                    dispatch(actions.computeValueFun(item));
                     break;
                 default:
                     break;
