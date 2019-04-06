@@ -8,6 +8,12 @@ export const Container = styled.div`
     font-size: 0.3rem;
     box-sizing: border-box;
     border: 1px solid #fff;
+    .bigSize {
+        color: #fff;
+    }
+    .smallSize {
+        font-size: 0.8rem;
+    }
 `;
 
 // 当前输入的区域和值

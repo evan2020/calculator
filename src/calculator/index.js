@@ -24,7 +24,7 @@ class Calculator extends Component {
         return (
             <Container>
                 {/* 当前输入的值 */}
-                <TextValue>{value}</TextValue>
+                <TextValue className={value.length>8?`smallSize`:`bigSize`}>{value}</TextValue>
                 {/* 根据是否存在结果显示计算过程或者结果 */}
                 {resultVal ? (
                     <ProcessText>{resultVal}</ProcessText>
