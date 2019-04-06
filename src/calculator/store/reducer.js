@@ -43,7 +43,7 @@ export default (state = defaultState, action) => {
         case constants.GET_VALUE_NOW:
             return state
                 .set(`value`, state.get(`value`) + action.value)
-                .set(`resultVal`, ``)
+                .set(`resultVal`, ``);
         // 获取默认值(清空)
         case constants.CLEAN_VALUE:
             return state
@@ -64,11 +64,16 @@ export default (state = defaultState, action) => {
             state.get(`keyData`).map((item, index) => {
                 if (item === `+`) {
                     res += Number(state.get(`keyData`).get(index - 1));
-                    res += lastStr;
-                }
+                } 
                 return item;
             });
-            return state.set(`resultVal`, res).set(`value`, ``).set(`keyData`, fromJS([]));
+            if (lastStr) {
+                res += lastStr;
+            }
+            return state
+                .set(`resultVal`, res)
+                .set(`value`, ``)
+                .set(`keyData`, fromJS([]));
         default:
             break;
     }

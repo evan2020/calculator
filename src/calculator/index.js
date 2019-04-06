@@ -23,9 +23,11 @@ class Calculator extends Component {
         return (
             <Container>
                 <TextValue>{value}</TextValue>
-                {
-                   resultVal?<ProcessText>{resultVal}</ProcessText>:<ProcessText>{keyData.join(` `)}</ProcessText>
-                }
+                {resultVal ? (
+                    <ProcessText>{resultVal}</ProcessText>
+                ) : (
+                    <ProcessText>{keyData.join(` `)}</ProcessText>
+                )}
                 {/* <ProcessText>{keyData.join(` `)}</ProcessText> */}
                 <KeyboardCon>
                     {keyArr.map((item, index) => {
@@ -68,7 +70,8 @@ const mapDispatchToProps = dispatch => {
                 item === `6` ||
                 item === `7` ||
                 item === `8` ||
-                item === `9`
+                item === `9` ||
+                item === `.`
             ) {
                 console.log(`item >>>>>`, item);
                 dispatch(actions.getValueNowFun(item));
