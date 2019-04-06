@@ -48,6 +48,14 @@ export const recordValue = (value = ``) => {
     };
 };
 
+// 退格
+export const backSpace = (value = ``) => {
+    return {
+        type: constants.BACK_SPACE,
+        value
+    };
+};
+
 // ------------------------------------定义并且导出actions end--------------------------------------
 
 // ------------------------------------action 异步函数 start----------------------------------------
@@ -79,6 +87,14 @@ export const recordValueFun = (value = ``) => {
 export const computeValueFun = (value = ``) => {
     return dispatch => {
         const action = computeValue(value);
+        dispatch(action);
+    };
+};
+
+// 退格
+export const backSpaceFun = (value = ``) => {
+    return dispatch => {
+        const action = backSpace(value);
         dispatch(action);
     };
 };

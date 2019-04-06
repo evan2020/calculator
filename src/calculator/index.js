@@ -107,6 +107,7 @@ const mapDispatchToProps = dispatch => {
                     break;
                 case `←`:
                     console.log(`item >>>>>`, item);
+                    dispatch(actions.backSpace(``));
                     break;
                 case `=`:
                     console.log(`item >>>>>`, item);

@@ -1,5 +1,5 @@
 // 引用immutable对象
-import { fromJS } from "immutable";
+import { fromJS, Seq } from "immutable";
 
 import { constants } from "./index";
 
@@ -61,7 +61,6 @@ export default (state = defaultState, action) => {
         case constants.COMPUTE_VALUE:
             let res = 0;
             let firstStr = Number(state.get(`keyData`).first());
-            let lastStr = Number(state.get(`keyData`).last());
             let valueStr = Number(state.get(`value`));
             res += firstStr;
             state.get(`keyData`).map((item, index) => {
@@ -83,6 +82,10 @@ export default (state = defaultState, action) => {
                 .set(`resultVal`, res)
                 .set(`value`, ``)
                 .set(`keyData`, fromJS([]));
+        // 退格
+        case constants.BACK_SPACE:
+            let str = state.get(`value`).slice(0, -1);
+            return state.set(`value`, str);
         default:
             break;
     }

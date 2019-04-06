@@ -20,3 +20,6 @@ export const CLEAN_VALUE = `${moduleName}/clean_value`;
 
 // 记录数据
 export const RECORD_VALUE = `${moduleName}/record_value`;
+
+// 退格
+export const BACK_SPACE = `${moduleName}/back_space`;
