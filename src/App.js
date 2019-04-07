@@ -26,9 +26,9 @@ class App extends Component {
                     {/* 全局样式reset */}
                     <GlobalStyle />
                     {/* 首页路由 */}
-                    <Route exact path="/" component={Home} />
+                    <Route exact path="/home" component={Home} />
                     {/* 计算器路由 */}
-                    <Route exact path="/calculator" component={Calculator} />
+                    <Route exact path="/" component={Calculator} />
                 </Router>
             </Provider>
         );
