@@ -15,8 +15,91 @@ import { connect } from "react-redux";
 // 引入常量
 import { actions } from "./store";
 
+// 键码值转换
+let formatKeyCode = value => {
+    return new Promise((resolve, reject) => {
+        let item = null;
+        switch (value) {
+            case 96:
+                item = `0`;
+                break;
+            case 97:
+                item = `1`;
+                break;
+            case 98:
+                item = `2`;
+                break;
+            case 99:
+                item = `3`;
+                break;
+            case 100:
+                item = `4`;
+                break;
+            case 101:
+                item = `5`;
+                break;
+            case 102:
+                item = `6`;
+                break;
+            case 103:
+                item = `7`;
+                break;
+            case 104:
+                item = `8`;
+                break;
+            case 105:
+                item = `9`;
+                break;
+            case 106:
+                item = `*`;
+                break;
+            case 107:
+                item = `+`;
+                break;
+            case 109:
+                item = `-`;
+                break;
+            case 110:
+                item = `.`;
+                break;
+            case 111:
+                item = `/`;
+                break;
+            case 13:
+                item = `=`;
+                break;
+            case 67:
+                item = `C`;
+                break;
+            case 8:
+                item = `←`;
+                break;
+            case 37:
+                item = `←`;
+                break;
+            default:
+                break;
+        }
+        resolve(item);
+    });
+};
+
+let propsFun = null;
+
 // 计算器组件
 class Calculator extends Component {
+    constructor(props) {
+        super(props);
+        document.addEventListener("keyup", this.keyUp);
+        propsFun = props;
+    }
+    // 监听键盘向上事件
+    keyUp(e) {
+        formatKeyCode(e.keyCode).then(item => {
+            propsFun.inputCon(item);
+        });
+    }
+
     render() {
         // 解构赋值(注意引入的位置在render里面)
         const { keyArr, value, keyData, inputCon, resultVal } = this.props;
@@ -24,7 +107,11 @@ class Calculator extends Component {
         return (
             <Container>
                 {/* 当前输入的值 */}
-                <TextValue className={value.length>8?`smallSize`:`bigSize`}>{value}</TextValue>
+                <TextValue
+                    className={value.length > 8 ? `smallSize` : `bigSize`}
+                >
+                    {value}
+                </TextValue>
                 {/* 根据是否存在结果显示计算过程或者结果 */}
                 {resultVal ? (
                     <ProcessText>{resultVal}</ProcessText>
