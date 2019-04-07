@@ -2,6 +2,7 @@
   "name": "calculator",
   "version": "0.1.0",
   "private": true,
+  "homepage": ".",
   "dependencies": {
     "immutable": "^4.0.0-rc.12",
     "react": "^16.8.6",
